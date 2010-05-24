@@ -5,6 +5,18 @@
 # This class sets up a puppet demo VM from scratch.
 
 class puppet-demotools {
+  $module = "puppet-demotools"
+  $p_uid = $config_puppet_uid ? {
+    default => $config_puppet_uid,
+    false   => "333"
+  }
+  $p_gid = $config_puppet_gid ? {
+    default => $config_puppet_gid,
+    false   => "333"
+  }
+  ###############################
+  File { owner => "0", group => "0", mode => "0644" }
+
   package {
     "puppet-server":
       ensure   => "installed",
@@ -13,15 +25,15 @@ class puppet-demotools {
     "puppet":
       name       => "puppet",
       ensure     => "present",
-      gid        => "333";
+      gid        => "${p_gid}";
   }
   user {
     "puppet":
       name       => "puppet",
       shell      => "/bin/false",
       ensure     => "present",
-      uid        => "333",
-      gid        => "333",
+      uid        => "${p_uid}",
+      gid        => "${p_gid}",
       comment    => "puppet",
       home       => "/var/lib/puppet",
       require    => [ Group["puppet"] ],
@@ -30,8 +42,6 @@ class puppet-demotools {
     "/root/.ssh":
       path     => "/root/.ssh",
       ensure   => "directory",
-      owner    => "0",
-      group    => "0",
       mode     => "0700";
   }
   file {
@@ -40,8 +50,20 @@ class puppet-demotools {
       ensure   => "file",
       source   => [ "puppet:///modules/puppet-demotools/authorized_keys.site",
                     "puppet:///modules/puppet-demotools/authorized_keys" ],
-      owner    => "0",
-      group    => "0",
-      mode     => "0644";
+  }
+  file {
+    [ "/etc/puppet", "/etc/puppet/manifests" ]:
+      path     => "/etc/puppet",
+      ensure   => "directory",
+      owner    => "${p_uid}",
+      group    => "${p_gid}",
+  }
+  file {
+    "/etc/puppet/manifests/site.pp":
+      path     => "/etc/puppet/manifests/site.pp",
+      ensure   => "file",
+      source   => "puppet:///modules/${module}/etc/puppet/manifests/site.pp",
+      owner    => "${p_uid}",
+      group    => "${p_gid}",
   }
 }
