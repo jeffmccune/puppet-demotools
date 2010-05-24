@@ -1,4 +1,8 @@
-Instructions:
+Quick Install:
+
+ssh root@vmhost.lan bash -c '"curl -o - http://github.com/jeffmccune/puppet-demotools/raw/master/bin/rhel-vm-setup | bash"'
+
+Detailed Instructions:
 
 Install a new CentOS 5.5 system into a Virtual Machine
 
