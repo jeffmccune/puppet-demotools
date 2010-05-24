@@ -7,4 +7,4 @@ base="${HOME}/puppet-demotools"
 
 export PATH="${base}/bin:${PATH}"
 
-exec puppet --modulepath="${base}/modules" --verbose "${base}"/manifests/setup.pp
+exec puppet --modulepath="${base}/modules" --verbose "${base}"/manifests/setup.pp $@
