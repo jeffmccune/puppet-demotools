@@ -54,4 +54,30 @@ class puppet-demotools {
       owner    => "${p_uid}",
       group    => "${p_gid}",
   }
+
+  ## Splunk Pre-setup
+  group {
+    "splunk":
+      name       => "splunk",
+      ensure     => "present",
+      gid        => "334";
+  }
+  user {
+    "splunk":
+      name       => "splunk",
+      shell      => "/bin/bash",
+      ensure     => "present",
+      uid        => "334",
+      gid        => "334",
+      comment    => "splunk",
+      home       => "/opt/splunk",
+      require    => [ Group["splunk"] ],
+  }
+  package {
+    "splunk":
+      name     => "splunk",
+      ensure   => "installed",
+      require  => [ User["splunk"] ],
+  }
+
 }
