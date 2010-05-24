@@ -2,4 +2,7 @@
 set -u
 set -u
 
-exec puppetmasterd --no-daemonize --verbose --modulepath=/var/lib/puppet/demo/puppet-demotools/modules:/etc/puppet/modules:/usr/share/modules $@
+base="/demp/puppet-demotools"
+export PATH="${base}/bin:${PATH}"
+
+exec puppetmasterd --no-daemonize --verbose --modulepath="${base}"/modules:/etc/puppet/modules:/usr/share/modules $@

@@ -3,6 +3,7 @@
 
 set -e
 set -u
+umask 0022
 
 # Set default branch for remote pull
 # You could fork my repository, or use a local one
@@ -14,7 +15,9 @@ if [[ $UID -ne 0 ]]; then
     exit 1
 fi
 
-cd ~root
+cd /
+[[ -d demo ]] || mkdir demo
+cd demo
 
 # https://fedoraproject.org/wiki/EPEL/FAQ#howtouse
 if ! (rpm -q epel-release > /dev/null)
@@ -31,7 +34,22 @@ fi
 
 # Install git to get the puppet-demotools repository
 puppet -v <<EOF
-package { git: ensure => installed }
+  package { git: ensure => installed }
+  group {
+    "puppet":
+      ensure     => "present",
+      gid        => "333";
+  }
+  user {
+    "puppet":
+      shell      => "/bin/nologin",
+      ensure     => "present",
+      uid        => "333",
+      gid        => "333",
+      comment    => "puppet",
+      home       => "/var/lib/puppet",
+      require    => [ Group["puppet"] ],
+  }
 EOF
 
 # Clone or update puppet-demotools

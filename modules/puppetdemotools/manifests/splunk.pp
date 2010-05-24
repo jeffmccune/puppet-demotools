@@ -20,7 +20,7 @@ class puppetdemotools::splunk {
       ensure     => "present",
       uid        => "${splunk_uid}",
       gid        => "${splunk_gid}",
-      groups     => [ "root" ],
+      groups     => [ "root", "puppet", "sys", "utmp", "lp" ],
       comment    => "Splunk Server",
       home       => "/opt/splunk",
       require    => [ Group["splunk"] ],

@@ -7,7 +7,7 @@
 class puppetdemotools {
   # Setup local yum repository
   require puppetdemotools::localyum
-  require puppetdemotools::splunk
+  include puppetdemotools::splunk
 
   ###############################
   $module = "puppetdemotools"
@@ -27,7 +27,7 @@ class puppetdemotools {
   }
   user {
     "puppet":
-      shell      => "/bin/false",
+      shell      => "/bin/nologin",
       ensure     => "present",
       uid        => "${p_uid}",
       gid        => "${p_gid}",
@@ -47,10 +47,24 @@ class puppetdemotools {
                     "puppet:///modules/${module}/authorized_keys" ],
   }
   file {
-    [ "/etc/puppet", "/etc/puppet/manifests" ]:
+    [ "/etc/puppet", "/etc/puppet/manifests", "/var/run/puppet" ]:
       ensure   => "directory",
       owner    => "${p_uid}",
       group    => "${p_gid}",
+  }
+  file {
+    "/var/log/puppet":
+      ensure   => "directory",
+      owner    => "${p_uid}",
+      group    => "${p_gid}",
+      mode     => "0750",
+  }
+  file {
+    "/etc/puppet/puppet.conf":
+      path     => "/etc/puppet/puppet.conf",
+      ensure   => "file",
+      source   => "puppet:///modules/${module}/etc/puppet/puppet.conf",
+      mode     => "0644",
   }
   file {
     "/etc/puppet/manifests/site.pp":
@@ -59,5 +73,4 @@ class puppetdemotools {
       owner    => "${p_uid}",
       group    => "${p_gid}",
   }
-
 }
