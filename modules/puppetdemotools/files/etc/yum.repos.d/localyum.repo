@@ -1,0 +1,9 @@
+# This file managed by puppet
+#
+
+[localyum]
+name=CentOS-$releasever - /var/lib/localyumrepo
+baseurl=file:///var/lib/localyumrepo
+gpgcheck=0
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5

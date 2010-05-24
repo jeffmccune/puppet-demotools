@@ -4,10 +4,16 @@
 # Puppet Demo Tools
 # This class sets up a puppet demo VM from scratch.
 
-class puppet-demotools {
-  $module = "puppet-demotools"
+class puppetdemotools {
+  # Setup local yum repository
+  require puppetdemotools::localyum
+
+  ###############################
+  $module = "puppetdemotools"
   $p_uid = "333"
   $p_gid = "333"
+  $splunk_uid = "334"
+  $splunk_gid = "334"
   ###############################
   File { owner => "0", group => "0", mode => "0644" }
 
@@ -38,8 +44,8 @@ class puppet-demotools {
   file {
     "/root/.ssh/authorized_keys":
       ensure   => "file",
-      source   => [ "puppet:///modules/puppet-demotools/authorized_keys.site",
-                    "puppet:///modules/puppet-demotools/authorized_keys" ],
+      source   => [ "puppet:///modules/${module}/authorized_keys.site",
+                    "puppet:///modules/${module}/authorized_keys" ],
   }
   file {
     [ "/etc/puppet", "/etc/puppet/manifests" ]:
@@ -60,16 +66,16 @@ class puppet-demotools {
     "splunk":
       name       => "splunk",
       ensure     => "present",
-      gid        => "334";
+      gid        => "${splunk_uid}";
   }
   user {
     "splunk":
       name       => "splunk",
       shell      => "/bin/bash",
       ensure     => "present",
-      uid        => "334",
-      gid        => "334",
-      comment    => "splunk",
+      uid        => "${splunk_uid}",
+      gid        => "${splunk_gid}",
+      comment    => "Splunk Server",
       home       => "/opt/splunk",
       require    => [ Group["splunk"] ],
   }
@@ -79,5 +85,4 @@ class puppet-demotools {
       ensure   => "installed",
       require  => [ User["splunk"] ],
   }
-
 }
