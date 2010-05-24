@@ -23,7 +23,6 @@ class puppet-demotools {
       uid        => "333",
       gid        => "333",
       comment    => "puppet",
-      membership => "",
       home       => "/var/lib/puppet",
       require    => [ Group["puppet"] ],
   }
