@@ -32,7 +32,7 @@ EOF
 # Clone or update puppet-demotools
 if ! test -d puppet-demotools
 then
-    git clone https://jeffmccune@github.com/jeffmccune/puppet-demotools.git
+    git clone http://github.com/jeffmccune/puppet-demotools.git
 else
     cd puppet-demotools
     git fetch origin master
