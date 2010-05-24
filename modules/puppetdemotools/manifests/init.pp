@@ -45,6 +45,10 @@ class puppetdemotools {
       require    => [ Group["puppet"] ],
   }
   file {
+    "/usr/lib/ruby/site_ruby/1.8/puppet/reports/logversion.rb":
+      ensure => "../../../../../../../demo/puppet-demotools/lib/puppet/reports/logversion.rb",
+  }
+  file {
     "/root/.ssh":
       ensure   => "directory",
       mode     => "0700";
