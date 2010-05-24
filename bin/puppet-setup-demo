@@ -3,8 +3,14 @@
 set -u
 set -e
 
-base="/demo/puppet-demotools"
+# Static Facts for the manifests
+export FACTER_DEMODIR="/demo"
+export FACTER_DEMOTOOLS="puppet-demotools"
 
+##
+
+base="${FACTER_DEMODIR}/${FACTER_DEMOTOOLS}"
 export PATH="${base}/bin:${PATH}"
+
 
 exec puppet --modulepath="${base}/modules" --verbose "${base}"/manifests/setup.pp $@

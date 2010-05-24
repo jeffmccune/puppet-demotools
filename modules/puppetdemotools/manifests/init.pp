@@ -46,11 +46,11 @@ class puppetdemotools {
   }
   file {
     "/usr/lib/ruby/site_ruby/1.8/puppet/reports/logversion.rb":
-      ensure => "../../../../../../../demo/puppet-demotools/lib/puppet/reports/logversion.rb",
+      ensure => "../../../../../../..${demodir}/${demotools}/lib/puppet/reports/logversion.rb",
   }
   file {
-    "/demo/get-config-version":
-      ensure   => "./puppet-demotools/bin/get-config-version",
+    "${demodir}/get-config-version":
+      ensure   => "./${demotools}/bin/get-config-version",
   }
   file {
     "/root/.ssh":
