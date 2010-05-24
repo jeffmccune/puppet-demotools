@@ -1,0 +1,23 @@
+#! /bin/bash
+#
+
+set -e
+set -u
+
+# https://fedoraproject.org/wiki/EPEL/FAQ#howtouse
+if ! (rpm -q epel-release > /dev/null)
+then
+    rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-3.noarch.rpm
+fi
+
+# Puppet Packages
+# 0.25.4 At the time of this writing
+
+if ! (rpm -q puppet > /dev/null); then
+    yum -y install puppet
+fi
+
+# Install git to get the puppet-demotools repository
+puppet -v <<EOF
+package { git: ensure => installed }
+EOF
