@@ -17,13 +17,11 @@ class puppet-demotools {
   }
   group {
     "puppet":
-      name       => "puppet",
       ensure     => "present",
       gid        => "${p_gid}";
   }
   user {
     "puppet":
-      name       => "puppet",
       shell      => "/bin/false",
       ensure     => "present",
       uid        => "${p_uid}",
@@ -34,27 +32,23 @@ class puppet-demotools {
   }
   file {
     "/root/.ssh":
-      path     => "/root/.ssh",
       ensure   => "directory",
       mode     => "0700";
   }
   file {
     "/root/.ssh/authorized_keys":
-      path     => "/root/.ssh/authorized_keys",
       ensure   => "file",
       source   => [ "puppet:///modules/puppet-demotools/authorized_keys.site",
                     "puppet:///modules/puppet-demotools/authorized_keys" ],
   }
   file {
     [ "/etc/puppet", "/etc/puppet/manifests" ]:
-      path     => "/etc/puppet",
       ensure   => "directory",
       owner    => "${p_uid}",
       group    => "${p_gid}",
   }
   file {
     "/etc/puppet/manifests/site.pp":
-      path     => "/etc/puppet/manifests/site.pp",
       ensure   => "file",
       source   => "puppet:///modules/${module}/etc/puppet/manifests/site.pp",
       owner    => "${p_uid}",
