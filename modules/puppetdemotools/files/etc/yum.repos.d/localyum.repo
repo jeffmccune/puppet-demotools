@@ -6,4 +6,7 @@ name=CentOS-$releasever - /var/lib/localyumrepo
 baseurl=file:///var/lib/localyumrepo
 gpgcheck=0
 enabled=1
+# Short TTL of 1 second since we're local
+metadata_expire=1
+cost=500
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
