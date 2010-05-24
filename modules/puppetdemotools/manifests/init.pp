@@ -7,13 +7,12 @@
 class puppetdemotools {
   # Setup local yum repository
   require puppetdemotools::localyum
+  require puppetdemotools::splunk
 
   ###############################
   $module = "puppetdemotools"
   $p_uid = "333"
   $p_gid = "333"
-  $splunk_uid = "334"
-  $splunk_gid = "334"
   ###############################
   File { owner => "0", group => "0", mode => "0644" }
 
@@ -61,28 +60,4 @@ class puppetdemotools {
       group    => "${p_gid}",
   }
 
-  ## Splunk Pre-setup
-  group {
-    "splunk":
-      name       => "splunk",
-      ensure     => "present",
-      gid        => "${splunk_uid}";
-  }
-  user {
-    "splunk":
-      name       => "splunk",
-      shell      => "/bin/bash",
-      ensure     => "present",
-      uid        => "${splunk_uid}",
-      gid        => "${splunk_gid}",
-      comment    => "Splunk Server",
-      home       => "/opt/splunk",
-      require    => [ Group["splunk"] ],
-  }
-  package {
-    "splunk":
-      name     => "splunk",
-      ensure   => "installed",
-      require  => [ User["splunk"] ],
-  }
 }

@@ -4,7 +4,8 @@ notice("puppet-demotools, jeff@puppetlabs.com, Twitter: 0xEFF")
 puppet::hostname {
   'puppet':
     domainname => 'demo.lan',
-    before => Class["puppetdemotools"],
+    before => [ Class["puppetdemotools"],
+                Class["puppetdemotools::splunk"], ]
 }
 
 include puppetdemotools
