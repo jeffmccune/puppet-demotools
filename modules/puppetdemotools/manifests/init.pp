@@ -49,6 +49,10 @@ class puppetdemotools {
       ensure => "../../../../../../../demo/puppet-demotools/lib/puppet/reports/logversion.rb",
   }
   file {
+    "/demo/get-config-version":
+      ensure   => "./puppet-demotools/bin/get-config-version",
+  }
+  file {
     "/root/.ssh":
       ensure   => "directory",
       mode     => "0700";
