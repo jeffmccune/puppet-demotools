@@ -7,12 +7,12 @@
 class puppet-demotools {
   $module = "puppet-demotools"
   $p_uid = $config_puppet_uid ? {
+    false   => "333",
     default => $config_puppet_uid,
-    false   => "333"
   }
   $p_gid = $config_puppet_gid ? {
+    false   => "333",
     default => $config_puppet_gid,
-    false   => "333"
   }
   ###############################
   File { owner => "0", group => "0", mode => "0644" }
