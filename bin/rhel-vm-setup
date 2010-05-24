@@ -35,7 +35,7 @@ then
     git clone http://github.com/jeffmccune/puppet-demotools.git
 else
     cd puppet-demotools
-    git fetch origin master
+    git fetch origin
     git checkout master
     git merge origin/master
     git reset --hard HEAD
