@@ -45,7 +45,7 @@ fi
 
 cd puppet-demotools
 git fetch origin +"${branch}"
-git branch --track "${branch}" origin/"${branch}" || :
+git branch --track "${branch}" origin/"${branch}" 2>/dev/null || :
 git checkout "${branch}"
 git merge origin/"${branch}"
 git reset --hard HEAD
