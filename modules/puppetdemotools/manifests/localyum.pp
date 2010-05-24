@@ -9,6 +9,7 @@ class puppetdemotools::localyum {
   file {
     "/etc/yum.repos.d/localyum.repo":
       ensure   => "file",
+      require  => [ Exec["localyumrepo"] ],
       source   => "puppet:///modules/${module}/etc/yum.repos.d/localyum.repo",
   }
   file {
@@ -21,6 +22,7 @@ class puppetdemotools::localyum {
   }
   exec {
     "createrepo /var/lib/localyumrepo":
+      alias   => "localyumrepo",
       returns => [ 0 ],
       require => [ File["/var/lib/localyumrepo"],
                    Package["createrepo"] ],
