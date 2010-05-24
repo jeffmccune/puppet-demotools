@@ -29,18 +29,24 @@ puppet -v <<EOF
 package { git: ensure => installed }
 EOF
 
+# Set default branch for remote pull
+: ${branch:=stable}
+
 # Clone or update puppet-demotools
 if ! test -d puppet-demotools
 then
     git clone http://github.com/jeffmccune/puppet-demotools.git
-else
     cd puppet-demotools
-    git fetch origin
-    git checkout master
-    git merge origin/master
-    git reset --hard HEAD
+    git checkout -b "${branch}" --track origin/"${branch}"
     cd ..
 fi
+
+cd puppet-demotools
+git fetch origin +"${branch}"
+git checkout "${branch}"
+git merge origin/"${branch}"
+git reset --hard HEAD
+cd ..
 
 # Execute puppet to setup the rest of the system
 exec puppet-demotools/bin/puppet-setup-demo

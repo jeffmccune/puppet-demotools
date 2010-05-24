@@ -1,6 +1,6 @@
 Quick Install:
 
-ssh root@vmhost.lan bash -c '"curl -o - http://github.com/jeffmccune/puppet-demotools/raw/master/bin/rhel-vm-setup | bash"'
+ssh root@vmhost.lan bash -c "'(echo branch=stable; curl -o - http://github.com/jeffmccune/puppet-demotools/raw/stable/bin/rhel-vm-setup) | bash'"
 
 Detailed Instructions:
 
