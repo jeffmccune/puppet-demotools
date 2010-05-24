@@ -30,5 +30,10 @@ package { git: ensure => installed }
 EOF
 
 # Clone puppet-demotools
+if ! test -d puppet-demotools
+then
+    git clone https://jeffmccune@github.com/jeffmccune/puppet-demotools.git
+fi
 
-git clone https://jeffmccune@github.com/jeffmccune/puppet-demotools.git
+# Execute puppet to setup the rest of the system
+exec puppet-demotools/puppet-setup-demo
