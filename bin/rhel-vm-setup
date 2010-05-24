@@ -4,6 +4,13 @@
 set -e
 set -u
 
+if [[ $UID -ne 0 ]]; then
+    echo "ERROR: This script must be run as root"
+    exit 1
+fi
+
+cd ~root
+
 # https://fedoraproject.org/wiki/EPEL/FAQ#howtouse
 if ! (rpm -q epel-release > /dev/null)
 then
@@ -21,3 +28,7 @@ fi
 puppet -v <<EOF
 package { git: ensure => installed }
 EOF
+
+# Clone puppet-demotools
+
+git clone https://jeffmccune@github.com/jeffmccune/puppet-demotools.git
