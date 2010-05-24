@@ -1,0 +1,5 @@
+#! /bin/bash
+set -u
+set -u
+
+exec puppetmasterd --no-daemonize --verbose --modulepath=/var/lib/puppet/demo/puppet-demotools/modules:/etc/puppet/modules:/usr/share/modules $@
