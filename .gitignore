@@ -1,0 +1,8 @@
+fonts.dir
+*~
+\#*\#
+.\#*
+*.pyc
+.nfs*
+session.*
+*.log
