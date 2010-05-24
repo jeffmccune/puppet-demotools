@@ -1,0 +1,18 @@
+Instructions:
+
+Install a new CentOS 5.5 system into a Virtual Machine
+
+Optional: Update the SSH Public Key variable at the top of
+modules/puppet-demo/manifests/init.pp
+
+Optional: Update other variables in the module.
+
+Copy rhel-vm-setup to the virtual machine.
+
+Execute the rhel-vm-setup script with bash.
+
+The rhel-vm-setup will:
+* Install puppet from EPEL
+* Install git
+* Clone https://jeffmccune@github.com/jeffmccune/puppet-demotools.git
+* Execute puppet-demotools/puppet-setup-demo
