@@ -29,10 +29,17 @@ puppet -v <<EOF
 package { git: ensure => installed }
 EOF
 
-# Clone puppet-demotools
+# Clone or update puppet-demotools
 if ! test -d puppet-demotools
 then
     git clone https://jeffmccune@github.com/jeffmccune/puppet-demotools.git
+else
+    cd puppet-demotools
+    git fetch origin master
+    git checkout master
+    git merge origin/master
+    git reset --hard HEAD
+    cd ..
 fi
 
 # Execute puppet to setup the rest of the system
