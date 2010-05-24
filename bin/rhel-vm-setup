@@ -36,4 +36,4 @@ then
 fi
 
 # Execute puppet to setup the rest of the system
-exec puppet-demotools/puppet-setup-demo
+exec puppet-demotools/bin/puppet-setup-demo
