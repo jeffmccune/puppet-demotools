@@ -15,11 +15,20 @@ class puppetdemotools {
   $p_gid = "333"
   ###############################
   File { owner => "0", group => "0", mode => "0644" }
+  Package { ensure => installed }
 
   package {
-    "puppet-server":
-      ensure   => "installed",
+    [ "puppet-server", "rubygems", "gcc" ]:
   }
+  package {
+    "ruby-debug":
+      name     => "ruby-debug",
+      ensure   => "installed",
+      provider => "gem",
+      require  => [ Package["rubygems"],
+                    Package["gcc"] ];
+  }
+
   group {
     "puppet":
       ensure     => "present",
