@@ -22,4 +22,4 @@ else
     commit=UNKNOWN
 fi
 
-echo "ref=${ref} commit=${commit}"
+echo "ref=\"${ref}\" commit=\"${commit}\""
