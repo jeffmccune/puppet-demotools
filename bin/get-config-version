@@ -1,2 +1,25 @@
-#!/bin/bash
-echo "HELLOTHERE"
+#! /bin/bash
+#
+# Jeff McCune <jmccune@puppetlabs.com>
+# 2010-05-24
+#
+# For multiple configuration versions,
+# Pass multiple key/value pairs
+# splunk will parse them nicely for us
+
+set -u
+set -e
+
+# e.g.
+# echo "auditkey1=${key1:-none} auditkey2=${key2:-none}"
+
+cd /demo/puppet-demotools
+
+ref=$(git symbolic-ref HEAD 2>/dev/null || echo UNKNOWN)
+if [[ -f .git/"${ref}" ]]; then
+    commit=$(cat .git/"${ref}")
+else
+    commit=UNKNOWN
+fi
+
+echo "ref=${ref} commit=${commit}"
