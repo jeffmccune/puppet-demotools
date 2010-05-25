@@ -7,4 +7,4 @@ base="/demp/puppet-demotools"
 export PATH="${base}/bin:${PATH:-/bin:/usr/bin:/sbin:/usr/sbin}"
 export RUBYLIB="${base}/lib:${RUBYLIB:-}"
 
-exec puppetmasterd --no-daemonize --verbose --modulepath="${base}"/modules:/etc/puppet/modules:/usr/share/modules $@
+exec puppetmasterd --modulepath="${base}"/modules:/etc/puppet/modules:/usr/share/modules $@
