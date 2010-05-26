@@ -20,9 +20,9 @@ Puppet::Reports.register_report(:logversion) do
     # Splunk will parse them into fields.
     self.logs.each do |log|
       saved_message = "#{log.message}"
-      if log.source then log.message << " resource=#{log.source}" end
-      if log.time then log.message << " eventtime='#{log.time}'" end
-      if log.file then log.message << " manifest='#{log.file}'" end
+      if log.source then log.message << " resource=\"#{log.source}\"" end
+      if log.time then log.message << " eventtime=\"#{log.time}\"" end
+      if log.file then log.message << " manifest=\"#{log.file}\"" end
       if log.line then log.message << " line=#{log.line}"   end
       # The version should be key=value already
       if log.version then log.message << " " << log.version end
