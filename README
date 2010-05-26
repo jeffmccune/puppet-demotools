@@ -1,16 +1,19 @@
-Quick Install:
+Quick Install
+=============
 
 branch=stable
 host=vmhost.lan
 ssh root@${host} bash -c "'(echo branch=${branch:=stable}; curl -o - http://github.com/jeffmccune/puppet-demotools/raw/${branch}/bin/rhel-vm-setup) | bash'"
 
-For the demonstration:
+For the demonstration
+=====================
 1: /demo/puppet-demotools/bin/puppet-setup-demo
 2: /demo/puppet-demotools/bin/demo-puppetmasterd --reports=logversion,store
 3: puppetd --test
 4: View results in Splunk
 
-Detailed Instructions:
+Detailed Instructions
+=====================
 
 Install a new CentOS 5.5 system into a Virtual Machine
 
@@ -28,3 +31,16 @@ The rhel-vm-setup will:
 * Install git
 * Clone https://jeffmccune@github.com/jeffmccune/puppet-demotools.git
 * Execute puppet-demotools/puppet-setup-demo
+
+Debugging
+=========
+Ruby-debug is nice for debugging the log processors
+This will help view available attributes and runtime
+objects in ruby when the log is processed.
+
+require 'rubygems'
+require 'ruby-debug'; Debugger.start
+...
+debugger
+
+Start puppetmasterd in the foreground with --no-daemonize

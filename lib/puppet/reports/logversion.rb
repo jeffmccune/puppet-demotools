@@ -6,6 +6,11 @@
 
 require 'puppet/reports'
 
+# Debugging
+require 'rubygems'
+require 'ruby-debug'
+Debugger.start
+
 Puppet::Reports.register_report(:logversion) do
   desc "Send all received logs to the local log destinations.  Usually
         the log destination is syslog."
@@ -16,6 +21,7 @@ Puppet::Reports.register_report(:logversion) do
       log.message =~ /Applying configuration version \'(.*?)\'/
     end
     config_version = Regexp.last_match(1)
+    debugger
 
     # Append the audit keys to the log message for splunk to pick up.
     self.logs.each do |log|
