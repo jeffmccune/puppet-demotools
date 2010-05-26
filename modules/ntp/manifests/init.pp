@@ -16,6 +16,7 @@ class ntp {
       source     => "puppet:///${module}/etc/ntp.conf",
       require    => [ Package["ntp"] ],
       notify     => [ Service["ntp"] ],
+  }
   file {
     "/etc/ntp":
       ensure     => "directory",

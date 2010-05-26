@@ -6,7 +6,7 @@ ssh root@${host} bash -c "'(echo branch=${branch:=stable}; curl -o - http://gith
 
 For the demonstration:
 1: /demo/puppet-demotools/bin/puppet-setup-demo
-2: /demo/puppet-demotools/bin/demo-puppetmasterd
+2: /demo/puppet-demotools/bin/demo-puppetmasterd --reports=logversion,store
 3: puppetd --test
 4: View results in Splunk
 
