@@ -4,6 +4,12 @@ branch=stable
 host=vmhost.lan
 ssh root@${host} bash -c "'(echo branch=${branch:=stable}; curl -o - http://github.com/jeffmccune/puppet-demotools/raw/${branch}/bin/rhel-vm-setup) | bash'"
 
+For the demonstration:
+1: /demo/puppet-demotools/bin/puppet-setup-demo
+2: /demo/puppet-demotools/bin/demo-puppetmasterd
+3: puppetd --test
+4: View results in Splunk
+
 Detailed Instructions:
 
 Install a new CentOS 5.5 system into a Virtual Machine
