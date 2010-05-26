@@ -44,3 +44,17 @@ require 'ruby-debug'; Debugger.start
 debugger
 
 Start puppetmasterd in the foreground with --no-daemonize
+
+Interesting data in the log objects:
+(rdb:70) ps log
+#<Puppet::Util::Log:0x2b0d5a614df0
+ @file="/demo/puppet-demotools/modules/ntp/manifests/init.pp",
+ @level=:notice,
+ @line=19,
+ @message=
+  "content changed '{md5}5baec8bdbf90f877a05f88ba99e63685' to '{md5}5baec8bdbf90f877a05f88ba99e63685'",
+ @source="//ntp/File[/etc/ntp.conf]/ensure",
+ @tags=["file", "class", "ntp", "node", "default", "main", "ensure", "notice"],
+ @time=Tue May 25 05:55:01 -0400 2010,
+ @version=
+  "ref=\"refs/heads/jeff\" commit=\"751c3388c9a3ecffb6fa40493f58758548771ec2\"">

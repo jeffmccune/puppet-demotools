@@ -16,17 +16,16 @@ Puppet::Reports.register_report(:logversion) do
         the log destination is syslog."
 
   def process
-    # Obtain the configuration version from the "first" log message
-    log = self.logs.find(ifnone=lambda{'NOTFOUND'}) do |log|
-      log.message =~ /Applying configuration version \'(.*?)\'/
-    end
-    config_version = Regexp.last_match(1)
-    debugger
-
-    # Append the audit keys to the log message for splunk to pick up.
+    # Append key/value pairs to the log message.
+    # Splunk will parse them into fields.
     self.logs.each do |log|
       saved_message = "#{log.message}"
-      log.message << " " << config_version
+      if log.source then log.message << " resource=#{log.source}" end
+      if log.time then log.message << " eventtime='#{log.time}'" end
+      if log.file then log.message << " manifest='#{log.file}'" end
+      if log.line then log.message << " line=#{log.line}"   end
+      # The version should be key=value already
+      if log.version then log.message << " " << log.version end
       Puppet::Util::Log.newmessage(log)
       log.message = saved_message
     end
