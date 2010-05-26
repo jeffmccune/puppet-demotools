@@ -2,7 +2,7 @@
 set -u
 set -u
 
-base="/demp/puppet-demotools"
+base="/demo/puppet-demotools"
 
 export PATH="${base}/bin:${PATH:-/bin:/usr/bin:/sbin:/usr/sbin}"
 export RUBYLIB="${base}/lib:${RUBYLIB:-}"
