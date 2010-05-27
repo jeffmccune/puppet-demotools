@@ -21,8 +21,8 @@ file {
   "/etc/ntp.conf":
     content => "# Empty NTP configuration file."
 }
-file {
-  "/var/log/daemon.log":
-    ensure => absent,
-    notify => Service["syslog"]
-}
+# file {
+#   "/var/log/daemon.log":
+#     ensure => absent,
+#     notify => Service["syslog"]
+# }
