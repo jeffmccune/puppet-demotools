@@ -13,9 +13,6 @@ puppet::hostname {
                 Class["puppetdemotools::splunk"], ]
 }
 
-file {
-}
-
 # Configure the timezone
 file {
   "/etc/localtime":
