@@ -9,8 +9,20 @@ service {
     hasrestart => "true",
     hasstatus  => "true";
 }
+service {
+  "syslogd":
+    name       => "syslogd",
+    enable     => "true",
+    ensure     => "running",
+    hasrestart => "true",
+    hasstatus  => "true";
+}
 file {
   "/etc/ntp.conf":
     content => "# Empty NTP configuration file."
 }
-
+file {
+  "/var/log/daemon.log":
+    ensure => absent,
+    notify => Service["syslogd"]
+}
