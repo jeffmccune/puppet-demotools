@@ -10,8 +10,8 @@ service {
     hasstatus  => "true";
 }
 service {
-  "syslogd":
-    name       => "syslogd",
+  "syslog":
+    name       => "syslog",
     enable     => "true",
     ensure     => "running",
     hasrestart => "true",
@@ -24,5 +24,5 @@ file {
 file {
   "/var/log/daemon.log":
     ensure => absent,
-    notify => Service["syslogd"]
+    notify => Service["syslog"]
 }
