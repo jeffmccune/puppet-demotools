@@ -14,13 +14,19 @@ puppet::hostname {
 }
 
 file {
-  "/etc/localtime":
-    ensure => "/usr/share/zoneinfo/Europe/Brussels"
 }
 
+# Configure the timezone
 file {
+  "/etc/localtime":
+    ensure => "/usr/share/zoneinfo/Europe/Brussels";
   "/etc/sysconfig/clock":
-    content  => "ZONE=\"${my_timezone}\"\nUTC=true\nARC=false\n"
+    content  => "ZONE=\"${my_timezone}\"\nUTC=true\nARC=false\n";
+}
+
+# Set the time
+exec {
+  "/usr/sbin/ntpdate time.apple.com":
 }
 
 include puppetdemotools
