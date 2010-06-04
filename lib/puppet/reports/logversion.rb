@@ -6,10 +6,10 @@
 
 require 'puppet/reports'
 
-# Debugging
-require 'rubygems'
-require 'ruby-debug'
-Debugger.start
+# JJM - Debugging
+# require 'rubygems'
+# require 'ruby-debug'
+# Debugger.start
 
 Puppet::Reports.register_report(:logversion) do
   desc "Send all received logs to the local log destinations.  Usually
@@ -19,10 +19,15 @@ Puppet::Reports.register_report(:logversion) do
     # Append key/value pairs to the log message.
     # Splunk will parse them into fields.
     self.logs.each do |log|
+      # Save the original message into a new String instance
       saved_message = "#{log.message}"
+      # Append the resource field.
       if log.source then log.message << " resource=\"#{log.source}\"" end
+      # Append the time of the event from puppetd itself.
       if log.time then log.message << " eventtime=\"#{log.time}\"" end
+      # Append the path to the manifest this event came from.
       if log.file then log.message << " manifest=\"#{log.file}\"" end
+      # Append the line number
       if log.line then log.message << " line=#{log.line}"   end
       # The version should be key=value already
       if log.version then log.message << " " << log.version end
