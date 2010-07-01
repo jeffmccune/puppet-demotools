@@ -1,7 +1,8 @@
 notice("puppet-demotools, jeff@puppetlabs.com, Twitter: 0xEFF")
 
 # $my_timezone = "America/New_York"
-$my_timezone = "Europe/Brussels"
+# $my_timezone = "Europe/Brussels"
+$my_timezone = "America/Los_Angeles"
 
 File { owner => "root", group => "root", mode => "0644" }
 
@@ -16,7 +17,7 @@ puppet::hostname {
 # Configure the timezone
 file {
   "/etc/localtime":
-    ensure => "/usr/share/zoneinfo/Europe/Brussels";
+    ensure => "/usr/share/zoneinfo/${my_timezone}";
   "/etc/sysconfig/clock":
     content  => "ZONE=\"${my_timezone}\"\nUTC=true\nARC=false\n";
 }
