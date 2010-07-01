@@ -1,0 +1,22 @@
+#! /bin/bash
+#
+
+set -e
+set -u
+
+os=$(facter operatingsystem)
+release=$(facter operatingsystemrelease)
+arch=$(facter architecture)
+
+yumdir="/var/yum/${os}_${release}_${arch}"
+
+test -e /mnt/repodata
+
+mkdir -p "${yumdir}"/
+
+rsync -avx --progress /mnt/ "${yumdir}"/
+
+echo "Copy Complete"
+
+# cat <<EOF >/etc/yum.repos.d/localmedia.repo
+
