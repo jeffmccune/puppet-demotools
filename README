@@ -5,6 +5,16 @@ branch=stable
 host=vmhost.lan
 ssh root@${host} bash -c "'(echo branch=${branch:=stable}; curl -o - http://github.com/jeffmccune/puppet-demotools/raw/${branch}/bin/rhel-vm-setup) | bash'"
 
+Puppet Runtime
+==============
+In order to use the runtime, execute /demo/puppet-demotools/bin/puppet-runtime
+
+A stable puppet runtime is provided in order to configure puppet
+using puppet.  This runtime expects puppet to NOT be installed
+into the ruby site directory.  If you have installed puppet packages,
+it is a good idea to remove them as testing will be performed by managing
+PATH and RUBYLIB environment variables.
+
 For performance Testing
 =======================
 1: /demo/puppet/demotools/bin/puppet-setup-testing

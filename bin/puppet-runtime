@@ -1,0 +1,21 @@
+#! /bin/bash
+#
+# This script provides a stable puppet executable
+# For use in setting up various enviornments.
+#
+
+set -u
+set -e
+
+# Static Facts for the manifests
+export FACTER_DEMODIR="/demo"
+export FACTER_DEMOTOOLS="puppet-demotools"
+
+##
+
+base="${FACTER_DEMODIR}/${FACTER_DEMOTOOLS}"
+export PATH="${base}/runtime/bin:${base}/bin:${PATH}"
+# Make Puppet and Facter available first.
+export RUBYLIB="${base}/runtime/lib:${RUBYLIB}"
+
+exec puppet --modulepath="${base}/modules" $@
