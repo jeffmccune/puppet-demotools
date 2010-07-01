@@ -3,6 +3,7 @@
 class puppettesting {
     $basedir = "/opt/puppetlabs"
     $puppeturl = "http://github.com/reductivelabs/puppet.git"
+    $facterurl = "http://github.com/reductivelabs/facter.git"
     File {
         ensure => directory,
         mode   => "0644",
@@ -12,6 +13,7 @@ class puppettesting {
     Vcsrepo {
         ensure => present,
         provider => "git",
+        require => [ File["${basedir}"] ],
     }
 ####
     file {
@@ -19,8 +21,11 @@ class puppettesting {
     }
     vcsrepo {
         "${basedir}/puppet":
-            require => [ File["${basedir}"] ],
-            source  => "${puppeturl}";
+            source => "${puppeturl}";
+        "${basedir}/facter":
+            source => "${facterurl}";
+        "${basedir}/puppet_spec":
+            source => "http://github.com/jes5199/puppet_spec.git";
     }
 }
 
