@@ -8,5 +8,5 @@
 # It creates everything in /opt/puppetlabs
 #
 
-puppet -vd --modulepath=/demo/puppet-demotools/modules \
-  /demo/puppet-demotools/manifests/setup-puppet-testing.pp
+puppet -v --modulepath=/demo/puppet-demotools/modules \
+  /demo/puppet-demotools/manifests/setup-puppet-testing.pp $*
