@@ -1,0 +1,45 @@
+#! /bin/zsh
+
+set -e
+
+if test -d puppet -o -d facter; then
+    echo " WARNING!"
+    echo "  Strange things happen if puppet or facter are in the"
+    echo "  current working directory"
+    echo "  (import errors from ruby are a prime example)"
+    echo " WARNING!"
+    echo ""
+    echo "I suggest changing to ~ or /tmp or something..."
+    echo ""
+    sleep 2
+fi
+
+# Set this to where you check out puppet and facter
+base="/opt/puppetlabs"
+
+# git://github.com/reductivelabs/puppet.git
+mypath="${base}/puppet/sbin:${base}/puppet/bin"
+myrubylib="${base}/puppet/lib"
+
+# git://github.com/reductivelabs/facter.git
+mypath="${mypath}:${base}/facter/bin"
+myrubylib="${myrubylib}:${base}/facter/lib"
+
+# http://github.com/jamtur01/puppet-scaffold.git
+mypath="${mypath}:${base}/puppet-scaffold/bin"
+myrubylib="${myrubylib}:${base}/puppet-scaffold/lib"
+
+# http://github.com/puppetlabs/puppet-module-tool.git
+# Also known as "pmt"  Will become "puppet module"
+mypath="${mypath}:${base}/puppet-module-tool/bin"
+myrubylib="${myrubylib}:${base}/puppet-module-tool/lib"
+
+# Existing environment
+mypath="${mypath}:${PATH}"
+myrubylib="${myrubylib}:${RUBYLIB}"
+
+
+export PATH="${mypath}"
+export RUBYLIB="${myrubylib%%:}"
+
+exec $argv
