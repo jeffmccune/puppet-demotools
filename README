@@ -5,6 +5,11 @@ branch=stable
 host=vmhost.lan
 ssh root@${host} bash -c "'(echo branch=${branch:=stable}; curl -o - http://github.com/jeffmccune/puppet-demotools/raw/${branch}/bin/rhel-vm-setup) | bash'"
 
+For performance Testing
+=======================
+1: /demo/puppet/demotools/bin/puppet-setup-testing
+2: TBD
+
 For the demonstration
 =====================
 1: /demo/puppet-demotools/bin/puppet-setup-demo
