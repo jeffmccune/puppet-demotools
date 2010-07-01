@@ -12,5 +12,4 @@ export FACTER_DEMOTOOLS="puppet-demotools"
 base="${FACTER_DEMODIR}/${FACTER_DEMOTOOLS}"
 export PATH="${base}/bin:${PATH}"
 
-
-exec puppet --modulepath="${base}/modules" --verbose "${base}"/manifests/setup.pp $@
+exec puppet-runtime --modulepath="${base}/modules" --verbose "${base}"/manifests/setup.pp $@
