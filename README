@@ -15,9 +15,10 @@ into the ruby site directory.  If you have installed puppet packages,
 it is a good idea to remove them as testing will be performed by managing
 PATH and RUBYLIB environment variables.
 
-For performance Testing
-=======================
+To setup performance Testing
+============================
 1: /demo/puppet/demotools/bin/puppet-setup-testing
+ * This script will setup everything needed in /opt/puppetlabs
 2: TBD
 
 For the demonstration
