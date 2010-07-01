@@ -1,0 +1,12 @@
+#! /bin/bash
+#
+# JJM 2010-07-01
+# This script should setup everything required for
+# Performance testing.
+#
+# It assumes puppet-demotools in /demo/puppet-demotools
+# It creates everything in /opt/puppetlabs
+#
+
+puppet -vd --modulepath=/demo/puppet-demotools/modules \
+  /demo/puppet-demotools/manifests/setup-puppet-testing.pp
