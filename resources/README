@@ -1,0 +1,5 @@
+This directory contains kickstart files to help
+bring up machines quickly.
+
+gm-cd.cfg - CD Based Gold Master (Bare)
+
