@@ -5,6 +5,7 @@
 class puppettesting {
     # JJM Place stuff in /opt/puppetlabs
     $optdir = $fact_optdir ? { false => "/opt/puppetlabs", default => "${fact_optdir}", }
+    notice("optdir is: [${optdir}]")
     # Comes from facter environment variable in puppet-runtime script
     $demodir_real = $demodir ? { false => "/demo", default => "${demodir}", }
     $demotools_real = $demotools ? { false => "puppet-demotools", default => "${demotools}", }
