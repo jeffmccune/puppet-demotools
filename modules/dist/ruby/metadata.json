@@ -1,0 +1,1 @@
+{"dependencies":[],"checksums":{"manifests/params.pp":"97627a8cd24f87aa96f8de454c8f08b5","manifests/dev.pp":"84188a6f55daeb157dc1c6edbdda2d0c","tests/init.pp":"c3c821d5d8b70fcc6ecbd0b15ed53109","manifests/init.pp":"ed7455ba3399643b32e33852b0b7e588","Modulefile":"6c256ab3eb6602827432d3d1ea358665"},"types":[],"version":"0.0.1","name":"puppetlabs-ruby"}

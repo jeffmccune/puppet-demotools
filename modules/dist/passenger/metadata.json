@@ -1,0 +1,27 @@
+{
+  "dependencies": [
+    {
+      "version_requirement": "0.0.3",
+      "name": "puppetlabs-apache"
+    },
+    {
+      "version_requirement": "0.0.1",
+      "name": "puppetlabs-gcc"
+    },
+    {
+      "version_requirement": "0.0.1",
+      "name": "puppetlabs-ruby"
+    }
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "manifests/params.pp": "ebb825352b007be247d305584f2d50ff",
+    "tests/init.pp": "ed442a24364697ff755ec0399fb4a0a5",
+    "manifests/init.pp": "6c68b46555a2e9464b240f4686dcdd33",
+    "Modulefile": "8b168a7386c752a5c03ea131b93b899d"
+  },
+  "version": "0.0.2",
+  "name": "puppetlabs-passenger"
+}
