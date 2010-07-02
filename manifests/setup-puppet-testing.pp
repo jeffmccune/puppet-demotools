@@ -8,6 +8,7 @@ $hostname_configured = $ipaddress ? {
 
 notice("Setting Hostname to: ${hostname_configured}")
 
+# Set the hostname of the system
 puppet::hostname {
     "${hostname_configured}":
         domainname => "${domain}";
@@ -16,6 +17,8 @@ puppet::hostname {
 include jeffprefs
 include puppettesting
 
-# We need gcc
+# We need gcc for Passenger
 include gcc
+# We need apache for Passenger
+include apache
 
