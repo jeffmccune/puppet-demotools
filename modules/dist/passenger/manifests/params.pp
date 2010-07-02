@@ -11,8 +11,8 @@
 # Sample Usage:
 #
 class passenger::params {
-  $version='2.2.11'
-  
+  # JJM Current as of 2010-07-02
+  $version='2.2.15'
   case $operatingsystem {
     'ubuntu', 'debian': {
       $gem_path = '/var/lib/gems/1.8/gems/'
