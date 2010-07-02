@@ -4,11 +4,11 @@
 
 class puppettesting {
     # JJM Place stuff in /opt/puppetlabs
-    $optdir = $fact_optdir ? { false => "/opt/puppetlabs", default => "${fact_optdir}", }
+    $optdir = $fact_optdir ? { "" => "/opt/puppetlabs", default => "${fact_optdir}", }
     notice("optdir is: [${optdir}]")
     # Comes from facter environment variable in puppet-runtime script
-    $demodir_real = $demodir ? { false => "/demo", default => "${demodir}", }
-    $demotools_real = $demotools ? { false => "puppet-demotools", default => "${demotools}", }
+    $demodir_real = $demodir ? { "" => "/demo", default => "${demodir}", }
+    $demotools_real = $demotools ? { "" => "puppet-demotools", default => "${demotools}", }
     # STATIC Variables
     $puppeturl = "http://github.com/reductivelabs/puppet.git"
     $facterurl = "http://github.com/reductivelabs/facter.git"
@@ -41,7 +41,7 @@ class puppettesting {
             require => Vcsrepo["${optdir}/puppet_spec"];
         "${optdir}/puppet_spec/local_setup.sh":
             ensure => file,
-            content => "source /demo/puppet-demotools/resources/environment\n";
+            content => "source /${demodir_real}/${demotools_real}/resources/environment\n";
     }
 }
 
