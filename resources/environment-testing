@@ -1,3 +1,8 @@
+#!/bin/bash
+
+set -u
+set -e
+
 # Static Facts for the manifests
 export FACTER_DEMODIR="/demo"
 export FACTER_DEMOTOOLS="puppet-demotools"
@@ -8,7 +13,7 @@ export PATH="${FACTER_FACT_OPTDIR}/puppet/bin:${PATH:-}"
 # Make Puppet and Facter available first.
 export RUBYLIB="${FACTER_FACT_OPTDIR}/puppet/lib:${FACTER_FACT_OPTDIR}/facter/lib:${RUBYLIB:-}"
 
-cd "${FACTER_FACT_OPTDIR}/puppet/lib
+cd "${FACTER_FACT_OPTDIR}/puppet/lib"
 
 BIN="${FACTER_FACT_OPTDIR}/puppet/bin"
 
