@@ -7,10 +7,9 @@
 # It assumes puppet-demotools in /demo/puppet-demotools
 # It creates everything in /opt/puppetlabs
 #
-
-set -u
 set -e
+set -u
 
+# puppet-runtime sets modulepath
 /demo/puppet-demotools/bin/puppet-runtime -v \
-    --modulepath=/demo/puppet-demotools/modules \
     /demo/puppet-demotools/manifests/setup-puppet-testing.pp $*

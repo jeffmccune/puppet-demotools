@@ -1,15 +1,15 @@
 #! /bin/bash
 #
+# JJM This script sets up the system for a demonstration.
+#
+
 set -u
 set -e
-
 # Static Facts for the manifests
 export FACTER_DEMODIR="/demo"
 export FACTER_DEMOTOOLS="puppet-demotools"
-
 ##
-
 base="${FACTER_DEMODIR}/${FACTER_DEMOTOOLS}"
 export PATH="${base}/bin:${PATH}"
 
-exec puppet-runtime --modulepath="${base}/modules" --verbose "${base}"/manifests/setup.pp $@
+exec puppet-runtime --verbose "${base}"/manifests/setup.pp $@
