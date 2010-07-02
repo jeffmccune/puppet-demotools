@@ -41,7 +41,7 @@ class puppettesting {
             require => Vcsrepo["${optdir}/puppet_spec"];
         "${optdir}/puppet_spec/local_setup.sh":
             ensure => file,
-            content => "source /${demodir_real}/${demotools_real}/resources/environment\n";
+            content => "source ${demodir_real}/${demotools_real}/resources/environment-testing\n";
     }
 }
 
