@@ -1,0 +1,16 @@
+{
+  "dependencies": [
+
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "manifests/params.pp": "9a06d348c7689e7b9c811a3bc8d17502",
+    "tests/gcc.pp": "d97b158981e1e2b710a0dec5ce8d40d0",
+    "manifests/init.pp": "a9f1f5821033784692ca044e5a06d278",
+    "Modulefile": "2cdf1f4641d1646331e353ade3d825a4"
+  },
+  "version": "0.0.2",
+  "name": "puppetlabs-gcc"
+}
