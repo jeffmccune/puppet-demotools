@@ -9,7 +9,7 @@ $testing_role = $hostname_configured ? {
     default => "agent",
 }
 notice("Configured hostname: [${hostname_configured}]")
-notice("Configured role: [${hostname_configured}]")
+notice("Configured role: [${testing_role}]")
 #################################################
 
 # Set the hostname of the system
