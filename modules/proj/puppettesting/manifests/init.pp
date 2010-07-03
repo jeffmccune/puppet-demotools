@@ -1,13 +1,15 @@
-# JJM Puppet Testing Module
-# This module sets up a host to run performance
-# testing.
-
+# Class: puppettesting
+#
+#  Jeff McCune <jeff@puppetlabs.com>
+#  2010-07-01
+#  This module sets up a puppet testing environment.
+#
 class puppettesting {
-    # JJM Place stuff in /opt/puppetlabs
+    # JJM /opt/puppetlabs is our default base directory
     $optdir = $fact_optdir ? { "" => "/opt/puppetlabs", default => "${fact_optdir}", }
     notice("optdir is: [${optdir}]")
     # Comes from facter environment variable in puppet-runtime script
-    $demodir_real = $demodir ? { "" => "/demo", default => "${demodir}", }
+    $demodir_real = $demodir ? { "" => "/opt/puppetlabs", default => "${demodir}", }
     $demotools_real = $demotools ? { "" => "puppet-demotools", default => "${demotools}", }
     # STATIC Variables
     $puppeturl = "http://github.com/reductivelabs/puppet.git"
@@ -24,9 +26,20 @@ class puppettesting {
         provider => "git",
         require => [ File["${optdir}"] ],
     }
+    Jeffutil::Tarball {
+        path => "${optdir}",
+        require => [ File["${optdir}"] ],
+    }
 #### Resource Declarations
     file {
-        [ "/opt", "${optdir}" ]:;
+        "/opt":;
+        "${optdir}":;
+    }
+    jeffutil::tarball {
+        "puppet-demotools.tar.gz":
+            source => "${params::demotools_tarball_real}";
+        "puppet.tar.gz":
+            source => "${params::puppet_tarball_real}";
     }
     vcsrepo {
         "${optdir}/puppet":
