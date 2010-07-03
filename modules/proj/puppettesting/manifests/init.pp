@@ -5,6 +5,8 @@
 #  This module sets up a puppet testing environment.
 #
 class puppettesting {
+    # We need our parameters
+    include puppettesting::params
     # JJM /opt/puppetlabs is our default base directory
     $optdir = $fact_optdir ? { "" => "/opt/puppetlabs", default => "${fact_optdir}", }
     notice("optdir is: [${optdir}]")
