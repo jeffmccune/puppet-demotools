@@ -40,7 +40,7 @@ define jeffutil::tarball($source, $archive=false, $path, $spooldir="/tmp") {
     $archive_real = $archive? { false => $name, default => $archive, }
     # Resources
     exec { "curl ${archive_real}":
-        command => "curl -o '${spooldir}/${archive_real}' '${source}'",
+        command => "curl --fail -o '${spooldir}/${archive_real}' '${source}'",
         path => ["/bin", "/usr/bin", "/usr/local/bin", "/opt/csw/bin", "/opt/sfw/bin", ],
         creates => "${spooldir}/${archive_real}",
         notify => Exec["unpack ${archive_real}"],
