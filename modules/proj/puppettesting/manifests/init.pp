@@ -39,12 +39,13 @@ class puppettesting {
     }
     jeffutil::tarball {
         "puppet-demotools.tar.gz":
-            source => "${params::demotools_tarball_real}";
+            source => "${params::httpbase}/puppet-demotools.tar.gz";
         "puppet.tar.gz":
-            source => "${params::puppet_tarball_real}";
+            source => "${params::httpbase}/puppet.tar.gz";
     }
     vcsrepo {
         "${optdir}/puppet":
+            require => Jeffutil::Tarball["puppet.tar.gz"],
             source => "${puppeturl}";
         "${optdir}/facter":
             source => "${facterurl}";
