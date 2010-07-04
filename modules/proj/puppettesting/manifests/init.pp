@@ -17,7 +17,8 @@ class puppettesting {
     Jeffutil::Tarball {
         path => "${params::optdir}",
         spooldir => $params::spooldir,
-        require => [ File["${params::optdir}"] ],
+        require => [ File["${params::optdir}"],
+                     File["${params::spooldir}" ], ],
     }
 #### Resource Declarations
     file {
