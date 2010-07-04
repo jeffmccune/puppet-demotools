@@ -7,57 +7,54 @@
 class puppettesting {
     # We need our parameters
     include puppettesting::params
-    # JJM /opt/puppetlabs is our default base directory
-    $optdir = $fact_optdir ? { "" => "/opt/puppetlabs", default => "${fact_optdir}", }
-    notice("optdir is: [${optdir}]")
-    # Comes from facter environment variable in puppet-runtime script
-    $demodir_real = $demodir ? { "" => "/opt/puppetlabs", default => "${demodir}", }
-    $demotools_real = $demotools ? { "" => "puppet-demotools", default => "${demotools}", }
-    # STATIC Variables
-    $puppeturl = "http://github.com/reductivelabs/puppet.git"
-    $facterurl = "http://github.com/reductivelabs/facter.git"
     # Resource Defaults
-    File {
-        ensure => directory,
-        mode   => "0644",
-        owner  => "0",
-        group  => "0",
-    }
+    File { ensure => directory, mode => "0644", owner => "0", group => "0" }
     Vcsrepo {
         ensure => present,
         provider => "git",
-        require => [ File["${optdir}"] ],
+        require => [ File["${params::optdir}"] ],
     }
     Jeffutil::Tarball {
-        path => "${optdir}",
-        require => [ File["${optdir}"] ],
+        path => "${params::optdir}",
+        spooldir => $params::spooldir,
+        require => [ File["${params::optdir}"] ],
     }
 #### Resource Declarations
     file {
+        "${params::spooldir}":;
         "/opt":;
-        "${optdir}":;
+        "${params::optdir}":;
     }
     jeffutil::tarball {
         "puppet-demotools.tar.gz":
             source => "${params::httpbase}/puppet-demotools.tar.gz";
         "puppet.tar.gz":
             source => "${params::httpbase}/puppet.tar.gz";
+        "facter.tar.gz":
+            source => "${params::httpbase}/facter.tar.gz";
+        "puppet_spec.tar.gz":
+            source => "${params::httpbase}/puppet_spec.tar.gz";
     }
     vcsrepo {
-        "${optdir}/puppet":
+        "${params::optdir}/puppet":
             require => Jeffutil::Tarball["puppet.tar.gz"],
-            source => "${puppeturl}";
-        "${optdir}/facter":
-            source => "${facterurl}";
-        "${optdir}/puppet_spec":
-            source => "http://github.com/jes5199/puppet_spec.git";
+            source => "${params::puppeturl}";
+        "${params::optdir}/facter":
+            require => Jeffutil::Tarball["facter.tar.gz"],
+            source => "${params::facterurl}";
+        "${params::optdir}/puppet_spec":
+            require => Jeffutil::Tarball["puppet_spec.tar.gz"],
+            source => "${params::puppet_specurl}";
+        "${params::optdir}/puppet-demotools":
+            require => Jeffutil::Tarball["puppet-demotools.tar.gz"],
+            source => "${params::puppet_demotoolsurl}";
     }
     file {
-        "${optdir}/puppet_spec":
-            require => Vcsrepo["${optdir}/puppet_spec"];
-        "${optdir}/puppet_spec/local_setup.sh":
+        "${params::optdir}/puppet_spec":
+            require => Vcsrepo["${params::optdir}/puppet_spec"];
+        "${params::optdir}/puppet_spec/local_setup.sh":
             ensure => file,
-            content => "source ${demodir_real}/${demotools_real}/resources/environment-testing\n";
+            content => "source ${params::demodir}/${params::demotools}/resources/environment-testing\n";
     }
 }
 
