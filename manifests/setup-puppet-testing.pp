@@ -26,6 +26,9 @@ include puppettesting
 include gcc
 # We need apache for Passenger
 include apache
-# Passenger
+# Passenger (Base install)
 include passenger
+
+# Puppet Master setup as passenger
+include puppettesting::master::passenger
 

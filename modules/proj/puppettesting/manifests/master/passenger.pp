@@ -12,7 +12,7 @@
 #
 # Sample Usage:
 #
-class puppettesting::master::passenger {
+class puppettesting::master::passenger inherits puppettesting::master {
     $module = "puppettesting"
     include "apache"
     # Resource defaults
