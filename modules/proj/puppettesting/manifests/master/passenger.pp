@@ -30,7 +30,7 @@ class puppettesting::master::passenger inherits puppettesting::master {
         "/etc/puppet/rack/config.ru":
             content => template("${module}/etc/puppet/rack/config.ru"),
             owner => puppet,
-            notify => [ Service["apache"],
+            notify => [ Service["apache"] ],
     }
     file {
         "/etc/httpd/conf.d/passenger.conf":
