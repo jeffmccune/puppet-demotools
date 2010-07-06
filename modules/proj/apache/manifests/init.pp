@@ -22,6 +22,7 @@ class apache {
     name      => $apache::params::apache_name,
     ensure    => running,
     enable    => true,
+    alias     => apache,
     subscribe => Package['httpd'],
   }
   #
