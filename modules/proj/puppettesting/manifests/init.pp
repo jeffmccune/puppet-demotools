@@ -7,6 +7,7 @@
 class puppettesting {
     # We need our parameters
     include puppettesting::params
+    include puppettesting::firewall
     # Resource Defaults
     File { ensure => directory, mode => "0644", owner => "0", group => "0" }
     Vcsrepo {
