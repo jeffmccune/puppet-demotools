@@ -31,6 +31,6 @@ class puppettesting::firewall inherits puppettesting {
         command => "/usr/sbin/setenforce 0",
         unless => "/usr/sbin/getenforce | /bin/grep -qx Permissive",
         onlyif => "/usr/sbin/selinuxenabled";
-
+    }
 }
 # EOF
