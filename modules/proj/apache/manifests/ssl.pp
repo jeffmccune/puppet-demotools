@@ -27,10 +27,12 @@ class apache::ssl {
      'centos', 'fedora', 'redhat': {
         package { $apache::params::ssl_package:
            require => Package['httpd'],
+           notify => Service["apache"],
         }
         file {
             "/etc/httpd/conf.d/000_ssl.conf":
                 source => "puppet:///modules/${module}/etc/httpd/conf.d/000_ssl.conf",
+                notify => Service["apache"],
         }
      }
      'ubuntu', 'debian': {
