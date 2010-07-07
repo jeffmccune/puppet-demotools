@@ -1,5 +1,18 @@
+# Class: jeffprefs
+#
+#   This module sets up things that make Jeff happy.
+#
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
 class jeffprefs {
     $module = "jeffprefs"
+    include ack
     File {
         owner => "root",
         group => "root",
