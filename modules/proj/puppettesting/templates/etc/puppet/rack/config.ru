@@ -14,12 +14,14 @@ require 'puppet'
 
 ARGV << "--rack"
 
-require 'puppet/application/puppetmasterd'
 # we're usually running inside a Rack::Builder.new {} block,
 # therefore we need to call run *here*.
-#
+
 # JJM 0.25.X uses Puppet::Application[:puppetmasterd].run
+# require 'puppet/application/puppetmasterd'
 # run Puppet::Application[:puppetmasterd].run
+
 # JJM 2.6.X uses Puppet::Application[:master].run
+require 'puppet/application/master'
 run Puppet::Application[:master].run
 
