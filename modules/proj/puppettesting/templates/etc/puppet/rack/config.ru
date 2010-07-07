@@ -3,6 +3,7 @@
 
 # if puppet is not in your RUBYLIB:
 # FIXME JJM This probably shouldn't be hard coded.
+$:.unshift('/opt/puppetlabs/facter/lib')
 $:.unshift('/opt/puppetlabs/puppet/lib')
 
 $0 = "puppetmasterd"
