@@ -14,7 +14,7 @@
 #
 class apache::ssl {
 
-  include apacheA
+  include apache
 
   File {
       owner => "0",
