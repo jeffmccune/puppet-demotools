@@ -17,9 +17,6 @@ class puppettesting::master::passenger inherits puppettesting::master {
     include apache
     include apache::ssl
     # Variables
-    # The location of the passenger module
-    $passenger_module_path = "/usr/lib/ruby/gems/1.8/gems/passenger-2.2.15/ext/apache2/mod_passenger.so"
-    $passenger_version = "passenger-2.2.15"
     # Resource defaults
     File {
         owner => "root",

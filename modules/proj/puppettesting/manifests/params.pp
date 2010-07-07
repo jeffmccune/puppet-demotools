@@ -24,5 +24,9 @@ class puppettesting::params {
     notice("::puppettesting::params::puppet_specurl='${puppet_specurl}'")
     $puppet_demotoolsurl = "http://github.com/jeffmccune/puppet-demotools.git"
     notice("::puppettesting::params::puppet_demotoolsurl='${puppet_demotoolsurl}'")
+    # The location of the passenger module
+    $passenger_module_path = "/usr/lib/ruby/gems/1.8/gems/passenger-2.2.15/ext/apache2/mod_passenger.so"
+    # The passenger_version
+    $passenger_version = "passenger-2.2.15"
 }
 # EOF
