@@ -2,7 +2,8 @@
 # SSL needs to be handled outside this, though.
 
 # if puppet is not in your RUBYLIB:
-# $:.unshift('/opt/puppet/lib')
+# FIXME JJM This probably shouldn't be hard coded.
+$:.unshift('/opt/puppetlabs/puppet/lib')
 
 $0 = "puppetmasterd"
 require 'puppet'
