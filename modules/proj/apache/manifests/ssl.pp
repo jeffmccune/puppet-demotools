@@ -13,6 +13,7 @@
 # Sample Usage:
 #
 class apache::ssl {
+    $module = "apache"
 
   include apache
 
