@@ -14,12 +14,22 @@
 #
 class apache::ssl {
 
-  include apache
-  
+  include apacheA
+
+  File {
+      owner => "0",
+      group => "0",
+      mode  => "0644",
+  }
+
   case $operatingsystem {
      'centos', 'fedora', 'redhat': {
         package { $apache::params::ssl_package:
            require => Package['httpd'],
+        }
+        file {
+            "/etc/httpd/conf.d/000_ssl.conf":
+                source => "puppet:///modules/${module}/etc/httpd/conf.d/000_ssl.conf",
         }
      }
      'ubuntu', 'debian': {
