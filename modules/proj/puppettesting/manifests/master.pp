@@ -28,16 +28,7 @@ class puppettesting::master {
             source => "puppet:///modules/${module}/etc/puppet/puppet.conf";
     }
     ####
-    exec {
-        "generate-cacerts":
-            command => "${runcmd} puppetca --list",
-            creates => "${ssldir}/ca/ca_key.pem",
-    }
-    exec {
-        "generate-sslcerts":
-            command => "${runcmd} puppetca --generate ${fqdn}",
-            creates => "${ssldir}/certs/${fqdn}.pem",
-    }
+    puppettesting::master::certificates { "${fqdn}": }
 }
 
 # EOF
