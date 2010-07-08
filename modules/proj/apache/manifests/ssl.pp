@@ -19,8 +19,6 @@ class apache::ssl inherits apache{
   include puppettesting::master::certificates
   File { owner => "0", group => "0", mode  => "0644", }
   ######
-  # Override the apache service to require the certificates
-  Service["httpd"] { require +> Class["puppettesting::master::certificates"] }
   # Add the SSL configuration.
   case $operatingsystem {
     'centos', 'fedora', 'redhat': {

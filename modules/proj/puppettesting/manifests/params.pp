@@ -28,5 +28,8 @@ class puppettesting::params {
     $passenger_module_path = "/usr/lib/ruby/gems/1.8/gems/passenger-2.2.15/ext/apache2/mod_passenger.so"
     # The passenger_version
     $passenger_version = "passenger-2.2.15"
+    # The wrapper command to execute the internal puppet runtime
+    # FIXME JJM This should be part of the puppetlabs-bootstrap project in /opt/puppetlabs
+    $wrappercmdinternal = "${optdir}/puppet-demotools/bin/wrappercmdinternal"
 }
 # EOF
