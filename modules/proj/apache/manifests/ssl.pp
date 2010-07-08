@@ -10,33 +10,33 @@
 #
 # Requires:
 #
+#   class puppettesting::master::certificates
+#
 # Sample Usage:
 #
-class apache::ssl {
-    $module = "apache"
-
-  include apache
-
-  File {
-      owner => "0",
-      group => "0",
-      mode  => "0644",
-  }
-
+class apache::ssl inherits apache{
+  $module = "apache"
+  include puppettesting::master::certificates
+  File { owner => "0", group => "0", mode  => "0644", }
+  ######
+  # Override the apache service to require the certificates
+  Service["apache"] { require +> Class["puppettesting::master::certificates"] }
+  # Add the SSL configuration.
   case $operatingsystem {
-     'centos', 'fedora', 'redhat': {
-        package { $apache::params::ssl_package:
-           require => Package['httpd'],
-           notify => Service["apache"],
+    'centos', 'fedora', 'redhat': {
+      package { $apache::params::ssl_package:
+        require => Package['httpd'],
+        notify => Service["apache"],
         }
-        file {
-            "/etc/httpd/conf.d/000_ssl.conf":
-                source => "puppet:///modules/${module}/etc/httpd/conf.d/000_ssl.conf",
-                notify => Service["apache"],
-        }
-     }
-     'ubuntu', 'debian': {
+      file {
+        "/etc/httpd/conf.d/000_ssl.conf":
+          source => "puppet:///modules/${module}/etc/httpd/conf.d/000_ssl.conf",
+          notify => Service["apache"],
+      }
+    }
+    'ubuntu', 'debian': {
         a2mod { "ssl": ensure => present, }
-     }
+    }
   }
 }
+# EOF
