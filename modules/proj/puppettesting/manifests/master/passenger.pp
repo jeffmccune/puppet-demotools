@@ -26,7 +26,11 @@ class puppettesting::master::passenger inherits puppettesting::master {
   $passenger_module_path = $params::passenger_module_path
   $passenger_version = $params::passenger_version
   # Classes to include
-  include puppettesting::master::apache
+  include apache::ssl
+
+  # We need certificates to be generated before Apache starts up
+  Puppettesting::Master::Exec["generate-sslcerts"] { notify +> Service["apache"] }
+  Puppettesting::Master::Exec["generate-cacerts"] { notify +> Service["apache"] }
 
   # Resource defaults
   File {
