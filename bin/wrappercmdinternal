@@ -18,5 +18,4 @@ export PATH="${base}/runtime/bin:${base}/bin:${PATH:-}"
 # Make Puppet and Facter available first.
 export RUBYLIB="${base}/runtime/lib:${RUBYLIB:-}"
 
-# Execute puppet with a pre-defined module path
-exec puppet --modulepath="${base}/modules/proj:${base}/modules/dist:/etc/puppet/modules" $@
+exec $@
