@@ -39,7 +39,5 @@ class puppettesting::master {
             creates => "${ssldir}/certs/${fqdn}.pem",
     }
 }
-    puppettesting::master:
-}
 
 # EOF
