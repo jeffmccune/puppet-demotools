@@ -31,8 +31,7 @@
 #
 define puppettesting::master::certificates(
   $ssldir="/etc/puppet/ssl",
-  $cn=false,
-  ) {
+  $cn=false) {
   $cn_real = $cn ? { false => $name, default => $cn }
   $runcmd = $params::wrappercmdinternal
   # JJM This command generates the certificate.
