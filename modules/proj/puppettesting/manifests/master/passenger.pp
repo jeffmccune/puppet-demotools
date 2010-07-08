@@ -29,8 +29,8 @@ class puppettesting::master::passenger inherits puppettesting::master {
   include apache::ssl
 
   # We need certificates to be generated before Apache starts up
-  Puppettesting::Master::Exec["generate-sslcerts"] { notify +> Service["apache"] }
-  Puppettesting::Master::Exec["generate-cacerts"] { notify +> Service["apache"] }
+  Exec["generate-sslcerts"] { notify +> Service["apache"] }
+  Exec["generate-cacerts"] { notify +> Service["apache"] }
 
   # Resource defaults
   File {
