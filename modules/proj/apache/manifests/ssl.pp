@@ -14,17 +14,17 @@
 #
 # Sample Usage:
 #
-class apache::ssl inherits apache{
+class apache::ssl inherits apache {
   $module = "apache"
-  include puppettesting::master::certificates
   File { owner => "0", group => "0", mode  => "0644", }
   ######
   # Add the SSL configuration.
   case $operatingsystem {
     'centos', 'fedora', 'redhat': {
-      package { $apache::params::ssl_package:
-        require => Package['httpd'],
-        notify => Service["apache"],
+      package {
+          $apache::params::ssl_package:
+            require => Package['httpd'],
+            notify => Service["apache"],
         }
       file {
         "/etc/httpd/conf.d/000_ssl.conf":
@@ -33,7 +33,11 @@ class apache::ssl inherits apache{
       }
     }
     'ubuntu', 'debian': {
-        a2mod { "ssl": ensure => present, }
+        a2mod {
+          "ssl":
+            ensure => present,
+            notify => Service["apache"],
+        }
     }
   }
 }
