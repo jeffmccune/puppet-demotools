@@ -24,7 +24,7 @@ class puppettesting::master::passenger inherits puppettesting::master {
   $module = "puppettesting"
   # Variables
   $passenger_module_path = $params::passenger_module_path
-  $passenger_module_version = $params::passenger_module_version
+  $passenger_version = $params::passenger_version
   # Classes to include
   include apache::ssl
   # Resource defaults
