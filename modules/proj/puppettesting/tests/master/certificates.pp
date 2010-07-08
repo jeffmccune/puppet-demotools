@@ -1,0 +1,1 @@
+include puppettesting::master::certificates
