@@ -31,5 +31,6 @@ class puppettesting::params {
     # The wrapper command to execute the internal puppet runtime
     # FIXME JJM This should be part of the puppetlabs-bootstrap project in /opt/puppetlabs
     $wrappercmdinternal = "${optdir}/puppet-demotools/bin/wrappercmdinternal"
+    $wrappercmd = "${optdir}/puppet-demotools/bin/wrappercmdinternal"
 }
 # EOF

@@ -13,7 +13,7 @@
 class puppettesting::master {
     $module = "puppettesting"
     # The Run Command sets up the environment for us.
-    $runcmd = $params::wrappercmd
+    $runcmd = $params::wrappercmdinternal
     # Use the default ssldir unless specified.
     $ssldir = $params::ssldir ? {
         false   => "/etc/puppet/ssl",
