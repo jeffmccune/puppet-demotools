@@ -25,6 +25,7 @@ class puppettesting::master::passenger inherits puppettesting::master {
   # Variables
   $passenger_module_path = $params::passenger_module_path
   $passenger_version = $params::passenger_version
+  $passenger_ruby = $params::passenger_ruby
   # Classes to include
   include apache::ssl
 
