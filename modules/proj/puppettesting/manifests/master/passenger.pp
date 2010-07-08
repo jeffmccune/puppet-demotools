@@ -1,43 +1,49 @@
 # Class: puppettesting::master::passenger
 #
-#    Manage a puppetmaster for testing using passenger.
+#   2010-07-07 Jeff McCune <jeff@puppetlabs.com>
+# 
+#   Manage a puppet master running within passenger.
 #
 # Parameters:
+#
+#   $params::passenger_module_path
+#   $params::passenger_module_version
 #
 # Actions:
 #
 # Requires:
+#
 #   Class["apache"]
 #   Service["apache"]
 #
 # Sample Usage:
 #
+#   include puppettesting::master::passenger
+#
 class puppettesting::master::passenger inherits puppettesting::master {
-    $module = "puppettesting"
-    include apache
-    include apache::ssl
-    # Variables
-    # Resource defaults
-    File {
-        owner => "root",
-        group => "root",
-        mode  => "0644",
-    }
-    # Resources
-    file {
-        [ "/etc/puppet/rack", "/etc/puppet/rack/public" ]:
-            ensure => directory;
-    }
-    file {
-        "/etc/puppet/rack/config.ru":
-            content => template("${module}/etc/puppet/rack/config.ru"),
-            owner => puppet,
-            notify => [ Service["apache"] ],
-    }
-    file {
-        "/etc/httpd/conf.d/passenger.conf":
-            content => template("${module}/etc/httpd/conf.d/passenger.conf"),
-            notify => [ Service["apache"] ];
-    }
+  $module = "puppettesting"
+  # Variables
+  $passenger_module_path = $params::passenger_module_path
+  $passenger_module_version = $params::passenger_module_version
+  # Classes to include
+  include apache::ssl
+  # Resource defaults
+  File {
+    owner => "0",
+    group => "0",
+    mode  => "0644",
+  }
+  # Resources
+  file {
+    [ "/etc/puppet/rack", "/etc/puppet/rack/public" ]:
+      ensure => directory;
+    "/etc/puppet/rack/config.ru":
+      content => template("${module}/etc/puppet/rack/config.ru"),
+      owner => puppet,
+      notify => [ Service["apache"] ];
+    "/etc/httpd/conf.d/passenger.conf":
+      content => template("${module}/etc/httpd/conf.d/passenger.conf"),
+      notify => [ Service["apache"] ];
+  }
 }
 # EOF
