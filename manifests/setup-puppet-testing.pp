@@ -27,7 +27,8 @@ include gcc
 # We need apache for Passenger
 include apache
 # Passenger (Base install)
-include passenger
+# FIXME: This installs the wrong version of passenger, rack
+# include passenger
 
 # Puppet Master setup as passenger
 include puppettesting::master::passenger
