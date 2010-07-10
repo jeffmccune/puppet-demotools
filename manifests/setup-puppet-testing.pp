@@ -18,6 +18,9 @@ puppet::hostname {
         domainname => "${domain}";
 }
 
+# Puppet Testing Modules
+include puppettesting::modules
+
 # Stuff to make Jeff happy...
 include jeffprefs
 # The actual testing infrastructure module
