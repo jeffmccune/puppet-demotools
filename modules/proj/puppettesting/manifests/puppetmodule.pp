@@ -21,9 +21,12 @@
 #
 define puppettesting::puppetmodule($location="/etc/puppet/modules") {
   $module = "puppettesting"
+  $dir = "${location}/${name}"
   File { owner => "0", group => "0", mode => "0644" }
-  Exec { path => "/bin:/usr/bin:/sbin:/usr/sbin" }
-  $dir = "${modulepath}/${name}"
+  Exec {
+    path    => "/bin:/usr/bin:/sbin:/usr/sbin",
+    require => File["${dir}/files"],
+  }
   ####
   file {
     "${dir}":
