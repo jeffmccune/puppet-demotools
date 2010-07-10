@@ -45,14 +45,14 @@ define puppettesting::puppetmodule($location="/etc/puppet/modules") {
   }
   ####
   puppettesting::randfile {
-    "${name}-1k": size => 1;
-    "${name}-8k": size => 8;
-    "${name}-64k": size => 64;
-    "${name}-256k": size => 256;
-    "${name}-512k": size => 512;
-    "${name}-1024k": size => 1024;
-    "${name}-4096k": size => 4096;
-    "${name}-8192k": size => 8192;
+    "${name}-1k": kilobytes => 1;
+    "${name}-8k": kilobytes => 8;
+    "${name}-64k": kilobytes => 64;
+    "${name}-256k": kilobytes => 256;
+    "${name}-512k": kilobytes => 512;
+    "${name}-1024k": kilobytes => 1024;
+    "${name}-4096k": kilobytes => 4096;
+    "${name}-8192k": kilobytes => 8192;
   }
 }
 # EOF
