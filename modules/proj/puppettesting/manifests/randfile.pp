@@ -24,7 +24,7 @@
 #     location => "/etc/puppet/modules/test/files",
 #   }
 #
-class puppettesting::randfile($kilobytes, $location) {
+define puppettesting::randfile($kilobytes, $location) {
   $module = "puppettesting"
   $dir = "${location}"
   exec {
