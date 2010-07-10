@@ -27,6 +27,7 @@ define puppettesting::puppetmodule($location="/etc/puppet/modules") {
     path    => "/bin:/usr/bin:/sbin:/usr/sbin",
     require => File["${dir}/files"],
   }
+  Puppettesting::Randfile { location => "${dir}/files" }
   ####
   file {
     "${dir}":
@@ -43,28 +44,15 @@ define puppettesting::puppetmodule($location="/etc/puppet/modules") {
       ensure => directory;
   }
   ####
-  exec {
-    "puppetmodule-file-${name}-1k":
-      command => "dd if=/dev/urandom of=${dir}/files/f1k bs=1k count=1",
-      creates => "${dir}/files/f1k";
-    "puppetmodule-file-${name}-8k":
-      command => "dd if=/dev/urandom of=${dir}/files/f1k bs=1k count=8",
-      creates => "${dir}/files/f8k";
-    "puppetmodule-file-${name}-16k":
-      command => "dd if=/dev/urandom of=${dir}/files/f1k bs=1k count=16",
-      creates => "${dir}/files/f16k";
-    "puppetmodule-file-${name}-64k":
-      command => "dd if=/dev/urandom of=${dir}/files/f1k bs=1k count=64",
-      creates => "${dir}/files/f64k";
-    "puppetmodule-file-${name}-512k":
-      command => "dd if=/dev/urandom of=${dir}/files/f1k bs=1k count=512",
-      creates => "${dir}/files/f512k";
-    "puppetmodule-file-${name}-1024k":
-      command => "dd if=/dev/urandom of=${dir}/files/f1k bs=1k count=1024",
-      creates => "${dir}/files/f1024k";
-    "puppetmodule-file-${name}-8192k":
-      command => "dd if=/dev/urandom of=${dir}/files/f1k bs=1k count=8192",
-      creates => "${dir}/files/f8192k";
+  puppettesting::randfile {
+    "${name}-1k": size => 1;
+    "${name}-8k": size => 8;
+    "${name}-64k": size => 64;
+    "${name}-256k": size => 256;
+    "${name}-512k": size => 512;
+    "${name}-1024k": size => 1024;
+    "${name}-4096k": size => 4096;
+    "${name}-8192k": size => 8192;
   }
 }
 # EOF
